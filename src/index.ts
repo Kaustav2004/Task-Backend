@@ -46,7 +46,8 @@ const updateExpiredTasks = async () => {
 };
 
 // Schedule the cron job to run every day at every minute
-cron.schedule("* * * * *", updateExpiredTasks);
+const cronSchedule = process.env.CRON_SCHEDULE || "0 0 * * *"; // Default to midnight
+cron.schedule(cronSchedule, updateExpiredTasks);
 
 
 // Connect to the database
